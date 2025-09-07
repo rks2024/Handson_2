@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 from models import db, User
 
 app = Flask(__name__, template_folder="templates")
@@ -48,11 +48,17 @@ def login():
         u = User.query.filter_by(email=e, password=p).first()
         if u:
             session['id'] = u.id
-        else:
-            return redirect(url_for('access'))
-        
-    return redirect(url_for('home'))
+            flash(f"Login is successful for you FOOL KOOMAR {u.email}", 'success')
+            return redirect(url_for('home'))
 
+        else:
+            flash(f"baadam khaale idiot, bhul gya username password {e}", 'danger')
+            return redirect(url_for('access'))
+    else:
+        flash(f"LOL ho gya, abey kuchh likh to sahi bimbi", 'warning')
+        return redirect(url_for('access'))
+
+    
 @app.route('/register', methods=['POST'])
 def register():
     e = request.form.get('email', None)
@@ -71,6 +77,11 @@ def register():
 def logout():
     session.pop('id', None)
     return redirect(url_for('access'))
+
+@app.route('/songs')
+def songs():
+    curr_usr = get_curr_user()
+    return render_template('songs.html', user = curr_usr)
 
 
 app.run(debug=True)
