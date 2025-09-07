@@ -6,43 +6,21 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-2">
-            <h1>Upload Songs</h1>
+        <div class="col-4">
+            <h4>Upload Songs</h4>
             <br>
-            <form action="{{url_for('upload_song')}}", method="POSt", enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Title</label>
-                    <input class="form-control" type="text" id="title" name="title">
-                </div>
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Lyrics</label>
-                    <input class="form-control" type="text" id="lyrics" name="lyrics">
-                </div>  
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Duration</label>
-                    <input class="form-control" type="text" id="duration" name="duration">
-                </div>
-                <div class="mb-3">                
-                    <label for="formFile" class="form-label">Date</label>
-                    <input class="form-control" type="text" id="date" name="date">
-                </div>
-                <div class="mb-3">                
-                    <label for="formFile" class="form-label">Upload Song</label>
-                    <input class="form-control" type="file" id="file" name="file">
-                </div>
-                
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-warning">Add new Song</button> 
-                </div>
-                 
-    
-            </form>
+            {% include './SongsComponents/upload_song.html'   %}
         </div>
-        <div class="col-6">
-            <h1>Show Songs</h1>
+        <div class="col-4">
+            <h4>Show Songs</h4>
+            <br>
+            {% include './SongsComponents/show_songs.html'   %}
+
         </div>
-        <div class="col-3">
-            <h1>Playing Songs</h1>
+        <div class="col-4">
+            <h4>Playing Songs</h4>
+            <br> 
+            {% include './SongsComponents/play_song.html'   %}
         </div>
     </div>
 </div>

@@ -82,7 +82,10 @@ def logout():
 @app.route('/songs')
 def songs():
     curr_usr = get_curr_user()
-    return render_template('songs.html', user = curr_usr)
+    songs = curr_usr.songs
+    song_id = request.args.get('song_id')
+    song =Song.query.filter_by(id=song_id).first()
+    return render_template('songs.html', user = curr_usr, songs=songs, song=song)
 
 @app.route('/upload_song', methods=['POST'])
 def upload_song():
@@ -93,14 +96,18 @@ def upload_song():
     lyrics = request.form.get('lyrics')
     file = request.files.get('file')
     
-    songObj = Song(title=title, lyrics=lyrics, duration=duration, date=date, user_id=curr_user.id)
+    if title and file:
 
-    db.session.add(songObj)
-    db.session.commit()
+        songObj = Song(title=title, lyrics=lyrics, duration=duration, date=date, user_id=curr_user.id)
 
-    filename=f'{songObj.id}' + '.mp3'
-    file.save(f'./static/songs/{filename}')
-    flash("abey ho gya upload", 'success')
+        db.session.add(songObj)
+        db.session.commit()
+
+        filename=f'{songObj.id}' + '.mp3'
+        file.save(f'./static/songs/{filename}')
+        flash("abey ho gya upload", 'success')
+    else:
+        flash("title and file field can not be empty", 'danger')
 
     return redirect(url_for('songs'))
 

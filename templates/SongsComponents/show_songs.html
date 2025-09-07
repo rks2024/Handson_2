@@ -1,0 +1,14 @@
+           <hr>
+            {% for song in songs %}
+            {{song.id}}. Title: {{song.title}}
+            <br>
+            Lyrics: {{song.lyrics}}
+            <br>
+            <a href="{{url_for('songs', song_id=song.id)}}">
+            <button>Play</button>
+            </a>
+            <br>
+
+            <hr>
+                
+            {% endfor %}

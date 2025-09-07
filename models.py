@@ -10,7 +10,7 @@ class User(db.Model):
     isCreator = db.Column(db.Boolean, default=False)
     isAdmin = db.Column(db.Boolean, default=False)
     isUser = db.Column(db.Boolean, default=True)
-    song = db.relationship('Song', backref='user', lazy=True)
+    songs = db.relationship('Song', backref='user', lazy=True)
 
 class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)

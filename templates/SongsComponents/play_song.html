@@ -1,0 +1,8 @@
+<audio controls>
+  <source src="{{url_for('static', filename='songs/'+song.id|string+'.mp3')}}" type="audio/mpeg">
+
+</audio>
+<hr>
+You are listening Song No. {{song.id}} 
+<br>
+Enjoy!
