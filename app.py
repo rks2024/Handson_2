@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash
-from models import db, User
+from models import db, User, Song
 
 app = Flask(__name__, template_folder="templates")
 
@@ -33,7 +33,8 @@ def nav():
 
 @app.route('/playlist')
 def playlist():
-    return render_template('playlist.html')
+    curr_usr = get_curr_user()
+    return render_template('playlist.html', user=curr_usr)
 
 @app.route('/access')
 def access():
@@ -82,6 +83,26 @@ def logout():
 def songs():
     curr_usr = get_curr_user()
     return render_template('songs.html', user = curr_usr)
+
+@app.route('/upload_song', methods=['POST'])
+def upload_song():
+    curr_user = get_curr_user()
+    title = request.form.get('title')
+    duration = request.form.get('duration')
+    date = request.form.get('date')
+    lyrics = request.form.get('lyrics')
+    file = request.files.get('file')
+    
+    songObj = Song(title=title, lyrics=lyrics, duration=duration, date=date, user_id=curr_user.id)
+
+    db.session.add(songObj)
+    db.session.commit()
+
+    filename=f'{songObj.id}' + '.mp3'
+    file.save(f'./static/songs/{filename}')
+    flash("abey ho gya upload", 'success')
+
+    return redirect(url_for('songs'))
 
 
 app.run(debug=True)

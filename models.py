@@ -10,13 +10,14 @@ class User(db.Model):
     isCreator = db.Column(db.Boolean, default=False)
     isAdmin = db.Column(db.Boolean, default=False)
     isUser = db.Column(db.Boolean, default=True)
-    song = db.relationship('Song', backref='user', Lazy=True)
+    song = db.relationship('Song', backref='user', lazy=True)
 
 class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
+    lyrics = db.Column(db.String, nullable=False)
     duration = db.Column(db.Integer, default='')
     date = db.Column(db.String, default='')
     rating = db.Column(db.String, default='')
-    isBlacklisted = db.Column(db.String, default=False)
-    user_id = db.Column(db.Integer, db.ForeignKey=('user.id'), nullable=False)
+    isBlacklisted = db.Column(db.String, default=0)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
