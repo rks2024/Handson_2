@@ -1,5 +1,16 @@
-<h1>{{name}}</h1>
-<hr>
-<p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur exercitationem voluptates cumque placeat a nisi quam quia sequi aliquid itaque tempora iste impedit reprehenderit, maiores officiis facere cum, nemo earum!
-</p>
+{% extends './layouts/layout.html' %}
+{% include './BasicComponents/navbar.html'   %}
+
+{% block body %}
+
+<h1>
+    hello guys, gobar kha lo jaldi se
+</h1>
+<br>
+{{user}}
+<br>
+{{user.email}}
+<br>
+{{user.password}}
+    
+{% endblock %}
