@@ -1,28 +1,33 @@
-<form action="{{url_for('upload_song')}}", method="POSt", enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Title</label>
-                    <input class="form-control" type="text" id="title" name="title">
-                </div>
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Lyrics</label>
-                    <input class="form-control" type="text" id="lyrics" name="lyrics">
-                </div>  
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Duration</label>
-                    <input class="form-control" type="text" id="duration" name="duration">
-                </div>
-                <div class="mb-3">                
-                    <label for="formFile" class="form-label">Date</label>
-                    <input class="form-control" type="text" id="date" name="date">
-                </div>
-                <div class="mb-3">                
-                    <label for="formFile" class="form-label">Upload Song</label>
-                    <input class="form-control" type="file" id="file" name="file">
-                </div>
-                
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-warning">Add new Song</button> 
-                </div>
-                 
-    
-            </form>
+{% if user.isBlacklisted   %}
+    <button class="btn btn-danger">You are Blacklisted  </button>
+{% else %}
+
+    <form action="/upload_song", method="POSt", enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Song Title</label>
+                        <input class="form-control" type="text" id="title" name="title" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lyrics" class="form-label">Song Lyrics</label>
+                        <input class="form-control" type="text-area" id="lyrics" name="lyrics" placeholder="">
+                    </div>  
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Song Duration</label>
+                        <input class="form-control" type="text" id="duration" name="duration" placeholder="125 sec">
+                    </div>
+                    <div class="mb-3">                
+                        <label for="dateCreated" class="form-label">Date Created</label>
+                        <input class="form-control" type="text" id="dateCreated" name="date" placeholder="31/12/2022">
+                    </div>
+                    <div class="mb-3">                
+                        <label for="formFile" class="form-label">Choose Song File</label>
+                        <input class="form-control" type="file" id="formFile" name="file">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Submit Song</button> 
+                    </div>
+                    
+        
+                </form>
+{% endif %}

@@ -1,0 +1,45 @@
+<div class="card-container" style="display: flex; flex-wrap: wrap;">
+
+
+    {% for song in songs %}
+
+
+    <div class="card" style="width: 30%; padding: auto; margin: auto">
+            <img src="{{url_for('static', filename='img/song_thumbnail.jpg')}}" class="card-img-top" alt="...">
+
+            <button class="btn btn-light disabled btn-sm">{{song.title}}</button>
+
+            {{song.rating}}
+            <a href = "{{url_for('file1.home', song_id=song.id)}}"><button class="btn btn-primary" style="width: 100%;">Play</button></a>
+
+            <form action="{{url_for('file1.flag', song_id = song.id)}}" method="POST">
+                <input type="text" name="reason">
+                <button type="submit">Flag it</button>
+            </form>
+
+            <div class="card-body" style="padding: 1px">
+                <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Add to Playlist
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    {% for playlist in playlists %}
+                    <li>
+                        <a class="dropdown-item" href="{{url_for('file1.add_to_playlist', song_id=song.id, playlist_id=playlist.id)}}">
+                            {{playlist.name}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                
+
+
+            </div>
+            <div>
+                {% include './HomePlaylistComponents/rating.html' %}
+            </div>
+
+    </div>
+    <br>
+{% endfor %}
+</div>

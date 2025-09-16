@@ -4,16 +4,24 @@
 
 {% block body %}
 
-<h1>
-    hello guys, gobar kha lo jaldi se
-</h1>
-<br>
-{{user}}
-<br>
-{{user.email}}
-<br>
-{{user.password}}
-<br>
-{{user.isCreator}}
-    
+<div style="margin: 10px;">
+    <div class="row">
+        <div class="col-8">
+            {% if search %} <h4>search result for: <strong> {{search}} </strong> </h4> {% else %}
+            <h4>Songs</h4> {% endif %}
+            <div style="border: 1px black solid; height: 80dvh; padding: 10px; overFlow-y: auto">
+                {% include './HomePlaylistComponents/show_home_songs.html' %}
+            </div>
+
+        </div>
+        <div class="col-4">
+            <h4>Playing Song</h4>
+             <h4>Songs</h4>
+            <div style="border: 1px black solid; height: 80dvh; padding: 10px; overFlow-y: auto">
+                {% include './SongsComponents/playing_song.html' %}
+            </div>           
+        </div>
+    </div>
+</div>
+
 {% endblock %}
